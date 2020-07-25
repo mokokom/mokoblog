@@ -1,0 +1,36 @@
+@import 'bootstrap/dist/css/bootstrap';
+
+.navbar {
+	background-color: black !important;
+}
+.nav-link,
+.navbar-brand {
+	color: white !important;
+}
+
+.navbar-brand {
+	font-weight: bold;
+	letter-spacing: 3px;
+	font-size: 1.7em;
+}
+
+.jumbotron {
+	background:linear-gradient(0deg, rgba(0,0,0, 0.6), rgba(0,0,0, 0.6)), url("typewriter.jpg");
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+#page-content {
+  flex: 1 0 auto;
+	background-color: rgb(247, 247, 247);
+}
+
+#sticky-footer {
+  flex-shrink: none;
+}
