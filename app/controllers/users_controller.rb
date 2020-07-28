@@ -4,9 +4,6 @@ class UsersController < ApplicationController
 	end
 
 	def create
-		# username = params[:user][:username]
-		# email = params[:user][:email]
-		# password = params[:user][:password]
 		@user = User.new(user_params)
 		if @user.save
 			flash[:notice] = "Welcome to the mokoblog #{@user.username}, your account has been successfully created"
@@ -16,9 +13,19 @@ class UsersController < ApplicationController
 		end
 	end
 
-	# def index
-	# 	@users = User.all
-	# end
+	def edit
+		@user = User.find(params[:id])
+	end
+
+	def update
+		@user = User.find(params[:id])
+		if @user.update(user_params)
+			flash[:notice] = "Hey #{@user.username}, your account has been successfully updated"
+			redirect_to articles_path
+		else
+			render :new
+		end
+	end
 
 	private
 
