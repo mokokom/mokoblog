@@ -1,8 +1,8 @@
-<% if @article.errors.any? %>
+<% if record.errors.any? %>
 	<div class="alert alert-danger alert-dismissible fade show" role="alert">
-		<h4 class="alert-heading">The following errors prevented the article to be saved</h4>
+		<h4 class="alert-heading">The following errors prevented the <%= record.class.name.downcase %> to be saved</h4>
 		<ul>
-			<% @article.errors.full_messages.each do |error| %>
+			<% record.errors.full_messages.each do |error| %>
 				<li><%= error %></li>
 			<% end %>
 		</ul>
