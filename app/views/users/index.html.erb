@@ -11,7 +11,7 @@
 						<h5 class="card-title">
 							<%= gravatar_for user, size: 200 %>
 						</h5>
-						<p class="card-text"><%= pluralize(user.articles.count, "article")%></p>
+						<p class="card-text"><%= user.articles.any? ? pluralize(user.articles.count, "article") : "#{user.username.capitalize} has no article yet"%></p>
             <%= link_to "View profile", user_path(user), class: "btn btn-outline-success" %>
             <%= link_to "Edit profile", edit_user_path(user), class: "btn btn-outline-info" %>
           </div>
