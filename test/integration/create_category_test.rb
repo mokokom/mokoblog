@@ -12,6 +12,7 @@ class CreateCategoryTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_match "Music", response.body
   end
+
   test "get new category form and reject invalid category submission" do
     get new_category_path
     assert_response :success
