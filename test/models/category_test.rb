@@ -10,6 +10,12 @@ class CategoryTest < ActiveSupport::TestCase
     assert @category.valid?
   end
 
+  test "category should be case sensitive and not valid if already exist" do
+    @category.save
+    @category2 = Category.new( name: "sports")
+    assert_not @category2.valid?
+  end
+
   test "category should be equal to sport" do
     assert_equal "Sports", @category.name
   end
