@@ -1,0 +1,19 @@
+<div class="row d-flex justify-content-center">
+	<div class="col-8">
+		<%= render "shared/errors", record: @category %>
+		<%= form_with model: @category, class: "shadow p-3 mb-3 bg-white rounded", local: true do |f|%>
+			<div class="form-group">
+				<%= f.label :name, "Category name", class: "col-form-label" %> 
+				<%= f.text_field :name , class: "form-control shadow rounded border-0 p-3", placeholder: "Enter the category name"%>
+			</div>
+			<div class="form-group d-flex justify-content-between align-items-center">
+			<% if @category.name.nil? %>
+				<%= link_to "[ Return to categories listing ]", categories_path, class: "text-left text-dark" %>
+			<% else %>
+				<%= link_to "[ Return to category ]", category_path(@category), class: "text-left text-dark" %>
+			<% end %>
+				<%= f.submit class: "btn btn-outline-dark" %>
+			</div>
+		<% end %>
+	</div>
+</div>

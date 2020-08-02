@@ -1,1 +1,14 @@
-<h1 class="my-3 text-center"><%= @category.name %></h1>
+<h1 class="my-3 text-center">Category: <%= @category.name %></h1>
+<div class="mt-4 text-center">
+    <% if logged_in? && current_user.admin? %>
+        <%= link_to "Edit category name", edit_category_path(@category), class: "btn btn-outline-info" %>
+    <% end %>
+</div>
+<h2 class="my-3 text-center">Articles</h2>
+<div class="flickr_pagination mb-2">
+    <%= will_paginate @articles, container: false %>
+</div>
+<%= render "articles/articles" %>
+<div class="flickr_pagination mb-2">
+    <%= will_paginate @articles, container: false %>
+</div>

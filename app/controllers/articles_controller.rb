@@ -17,9 +17,7 @@ class ArticlesController < ApplicationController
 
 	def create
 		@article = Article.new(article_params)
-		# hard code waiting for authentification
 		@article.user = current_user
-		# @article.user = User.first
 		if @article.save
 			flash[:notice] = "Article has been created successfully"
 			redirect_to @article
@@ -48,7 +46,7 @@ class ArticlesController < ApplicationController
 	private
 
 	def article_params
-		params.require(:article).permit(:title, :description)
+		params.require(:article).permit(:title, :description, category_ids: [])
 	end
 
 	def set_article
