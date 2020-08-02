@@ -3,35 +3,40 @@
     <%= will_paginate @users, container: false %>
 </div>
 <div class="container">
-  <% @users.each do |user| %>
-    <div class="row d-flex justify-content-center">
-      <div class="col-8 text-center">
-        <div class="card text-center shadow mb-5 bg-white rounded">
-          <div class="card-header font-italic">
-            <%= link_to user.username, user_path(user) %>
-          </div>
-          <div class="card-body">
-						<h5 class="card-title">
-							<%= gravatar_for user, size: 200 %>
-						</h5>
-						<p class="card-text"><%= user.articles.any? ? pluralize(user.articles.count, "article") : "#{user.username.capitalize} has no article yet"%></p>
+  <table>
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Username</th>
+        <th scope="col">Articles</th>
+        <th scope="col">Join</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <th scope="row">
+            <%= gravatar_for user, size: 50%>
+          </th>
+          <td><%= user.username %></td>
+          <td><%= user.articles.any? ? pluralize(user.articles.count, "article") : "#{user.username.capitalize} has no article yet"%></td>
+          <td>Joined <%= time_ago_in_words(user.created_at) %> ago</td>
+          <td>
             <%= link_to "View profile", user_path(user), class: "btn btn-outline-success" %>
-            <% if logged_in? %>
-              <% if current_user == user %>
-                <%= link_to "Edit profile", edit_user_path(user), class: "btn btn-outline-info" %>
+              <% if logged_in? %>
+                <% if current_user == user %>
+                  <%= link_to "Edit profile", edit_user_path(user), class: "btn btn-outline-info" %>
+                <% end %>
+                <% if current_user.admin? %>
+                  <%= link_to "Delete profile", user_path(user), class: "btn btn-outline-danger", method: :delete, data: { confirm: "Are you sure you want to delete account and all associated articles?"} %>
+                <% end %>
               <% end %>
-              <% if current_user.admin? %>
-                <%= link_to "Delete profile", user_path(user), class: "btn btn-outline-danger", method: :delete, data: { confirm: "Are you sure you want to delete account and all associated articles?"} %>
-              <% end %>
-            <% end %>
-          </div>
-          <div class="card-footer text-muted">
-            <small>Joined <%= time_ago_in_words(user.created_at) %> ago</small>
-          </div>
-        </div>
-      </div>
-    </div>
-  <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
 <div class="flickr_pagination mb-2">
     <%= will_paginate @users, container: false %>
